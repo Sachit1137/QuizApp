@@ -70,7 +70,7 @@ public class MainActivity extends Activity implements OnClickListener{
         	db.execSQL("create table bol(ques varchar2(50),ans varchar2(50));");
         	db.execSQL("insert into bol values('Q.Who is popularly known as Father of Indian Cinema?','Dadasaheb Phalke')");
         	db.execSQL("insert into bol values('Q.Which Indian actor is known as Tragedy King?','Dilip Kumar')");
-        	db.execSQL("insert into bol values('Q.Beautiful actress Madhubala was married to …………………….','Kishore Kumar')");
+        	db.execSQL("insert into bol values('Q.Beautiful actress Madhubala was married to â€¦â€¦â€¦â€¦â€¦â€¦â€¦â€¦.','Kishore Kumar')");
         	db.execSQL("insert into bol values('Q.Shivaji Rao Gaikwad is the real name of which actor?','Rajinikanth')");
         	db.execSQL("insert into bol values('Q.Which of these is not related to Hema Malini?','Sports')");
         	db.execSQL("insert into bol values('Q.Which was the last movie directed by Yash Chopra?','Jab Tak Hai Jaan')");
@@ -103,35 +103,36 @@ public class MainActivity extends Activity implements OnClickListener{
     	}
     	return super.onContextItemSelected(item);
     }   
-   public void onClick(View v) {
-			if(v.getId()==R.id.imageButton1){
-				Intent t=new Intent(this,MyService.class);
-				startService(t);
+	public void onClick(View v) {
+		if(v.getId()==R.id.imageButton1){
+			Intent t=new Intent(this,MyService.class);
+			startService(t);
+		}
+		if(v.getId()==R.id.imageButton2){
+			Intent t=new Intent(this,MyService.class);
+			stopService(t);
+		}
+		if(v.getId()==R.id.start){ 
+			if(s=="tec"){
+				Intent i=new Intent(this,Quiz.class);
+				i.putExtra("type", s);
+				startActivity(i);
+			}	
+			else if(s=="gen"){
+				Intent i=new Intent(this,Quiz.class);
+				i.putExtra("type", s);
+				startActivity(i);
 			}
-			if(v.getId()==R.id.imageButton2){
-				Intent t=new Intent(this,MyService.class);
-				stopService(t);
+			else if(s=="bol"){
+				Intent i=new Intent(this,Quiz.class);
+				i.putExtra("type", s);
+				startActivity(i);	
 			}
-			if(v.getId()==R.id.start){ 
-				if(s=="tec"){
-					Intent i=new Intent(this,Quiz.class);
-					i.putExtra("type", s);
-					startActivity(i);
-				}	
-				else if(s=="gen"){
-					Intent i=new Intent(this,Quiz.class);
-					i.putExtra("type", s);
-					startActivity(i);
-				}
-				else if(s=="bol"){
-					Intent i=new Intent(this,Quiz.class);
-					i.putExtra("type", s);
-					startActivity(i);	
-				}
-				else
-					Toast.makeText(this,"Select Quiz Type!!",Toast.LENGTH_SHORT).show();
-			}
-		    if(v.getId()==R.id.exit){
+			else
+				Toast.makeText(this,"Select Quiz Type!!",Toast.LENGTH_SHORT).show();
+		}
+		
+	    	if(v.getId()==R.id.exit){
 			AlertDialog.Builder ab=new AlertDialog.Builder(MainActivity.this);
 			ab.setTitle("Exit");
 			ab.setMessage("Are You Sure?");
